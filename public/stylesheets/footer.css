@@ -1,0 +1,33 @@
+.footer {
+    background-color: #0f0e17; /* dark grounding footer */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fffffe; /* soft white */
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #ff8906; /* bright accent */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #f25f4c; /* warm accent hover */
+}
+
+.footer-contact span,
+.footer-left,
+.footer-links {
+    color: #a7a9be; /* soft grey for secondary details */
+}
+
+.footer span {
+    margin: 0 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+}
+

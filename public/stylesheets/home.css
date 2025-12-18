@@ -1,5 +1,5 @@
 body {
-    height: 100vh;
+    min-height: 100vh;
     background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
     url('https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg');
     background-size: cover;
@@ -35,3 +35,4 @@ body {
     color: #333;
     text-shadow: none;
 }
+

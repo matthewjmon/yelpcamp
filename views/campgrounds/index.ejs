@@ -1,44 +1,55 @@
 <% layout('layouts/boilerplate') %>
-<div id="cluster-map"></div>
-<h1>All Campgrounds</h1>
-<div>
-  <a href="/campgrounds/new">Add Campground</a>
-</div>
-<% for (let campground of campgrounds){ %>
-<div class="card mb-3">
-  <div class="row">
-    <div class="col-md-4">
-      <% if (campground.images.length) { %>
-      <img
-        crossorigin="anonymous"
-        class="img-fluid"
-        alt=""
-        src="<%= campground.images[0].url %>"
-      />
-      <% } else { %>
-      <img
-        crossorigin="anonymous"
-        class="img-fluid"
-        alt=""
-        src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png"
-      />
-      <% } %>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= campground.title %></h5>
-        <p class="card-text"><%= campground.description %></p>
-        <p class="card-text">
-          <small class="text-secondary"><%= campground.location %></small>
-        </p>
-        <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>"
-          >View <%= campground.title %></a
-        >
+
+<div id="campgrounds-index-page">
+  <div id="cluster-map"></div>
+  <h1 id="campgrounds-heading" class="mt-5 mb-4 text-center">
+    All Campgrounds
+  </h1>
+  <div class="campgrounds-container row gx-4 gy-4">
+    <% for (let campground of campgrounds){ %>
+    <div class="col-lg-6">
+      <div class="campground-listing-card card mb-3">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <% if (campground.images.length) { %>
+            <img
+              crossorigin="anonymous"
+              class="img-fluid h-100 w-100"
+              style="
+                object-fit: cover;
+                border-top-left-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+              "
+              alt=""
+              src="<%= campground.images[0].url %>"
+            />
+            <% } else { %>
+            <img
+              crossorigin="anonymous"
+              class="img-fluid"
+              alt=""
+              src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png"
+            />
+            <% } %>
+          </div>
+          <div class="col-md-7">
+            <div class="card-body ps-4">
+              <h5 class="card-title"><%= campground.title %></h5>
+              <p class="card-text"><%= campground.description %></p>
+              <p class="card-text">
+                <small class="text-secondary"><%= campground.location %></small>
+              </p>
+              <a class="btn" href="/campgrounds/<%=campground._id%>"
+                >View <%= campground.title %></a
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <% } %>
   </div>
 </div>
-<% } %> 
 <script>
   const maptilerApiKey = "<%- process.env.MAPTILER_API_KEY %>";
   const campgrounds = {

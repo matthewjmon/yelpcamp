@@ -85,7 +85,9 @@ const connectSrcUrls = [
     "https://cdn.jsdelivr.net"
 ];
 
-const fontSrcUrls = [];
+const fontSrcUrls = [
+    "https://cdn.jsdelivr.net"
+];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
@@ -102,7 +104,8 @@ app.use(
                 "https://res.cloudinary.com/dyj8e4dsr/", 
                 "https://images.unsplash.com/",
                 "https://api.maptiler.com/",
-                "https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg"
+                "https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg",
+                "https://images.unsplash.com"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },

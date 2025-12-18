@@ -1,19 +1,29 @@
 maptilersdk.config.apiKey = maptilerApiKey;
 
+/* Preprocess campgrounds to reduce payload and speed up rendering */
+const minimalCampgrounds = {
+    type: 'FeatureCollection',
+    features: campgrounds.features.map(f => ({
+        type: 'Feature',
+        geometry: f.geometry,
+        properties: { popUpMarkup: f.properties.popUpMarkup }
+    }))
+};
+
 const map = new maptilersdk.Map({
     container: 'cluster-map',
     style: maptilersdk.MapStyle.BRIGHT,
-    center: [-103.59179687498357, 40.66995747013945],
-    zoom: 3
+    center: [24.9916, -28.4793], // fallback center
+    zoom: 5
 });
 
-map.on('load', function () {
+map.on('load', () => {
     map.addSource('campgrounds', {
         type: 'geojson',
-        data: campgrounds,
+        data: minimalCampgrounds,
         cluster: true,
-        clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        clusterMaxZoom: 14,
+        clusterRadius: 40
     });
 
     map.addLayer({
@@ -22,24 +32,18 @@ map.on('load', function () {
         source: 'campgrounds',
         filter: ['has', 'point_count'],
         paint: {
-            // Use step expressions (https://docs.maptiler.com/gl-style-specification/expressions/#step)
-            // with three steps to implement three types of circles:
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#00BCD4',
-                10,
-                '#2196F3',
-                30,
+                '#00BCD4', 10,
+                '#2196F3', 30,
                 '#3F51B5'
             ],
             'circle-radius': [
                 'step',
                 ['get', 'point_count'],
-                15,
-                10,
-                20,
-                30,
+                15, 10,
+                20, 30,
                 25
             ]
         }
@@ -70,30 +74,39 @@ map.on('load', function () {
         }
     });
 
-    // inspect a cluster on click
-    map.on('click', 'clusters', async (e) => {
-        const features = map.queryRenderedFeatures(e.point, {
-            layers: ['clusters']
+    /* Autofocus on all campground points after tiles are ready */
+    map.on('idle', () => {
+        if (!minimalCampgrounds.features.length) return;
+
+        const bounds = new maptilersdk.LngLatBounds();
+        minimalCampgrounds.features.forEach(f =>
+            bounds.extend(f.geometry.coordinates)
+        );
+
+        map.fitBounds(bounds, {
+            padding: 60,
+            maxZoom: 9,   // prevents zooming into a single campsite
+            duration: 800
         });
+    });
+
+    /* Cluster zoom */
+    map.on('click', 'clusters', async (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
         const clusterId = features[0].properties.cluster_id;
         const zoom = await map.getSource('campgrounds').getClusterExpansionZoom(clusterId);
+
         map.easeTo({
             center: features[0].geometry.coordinates,
             zoom
         });
     });
 
-    // When a click event occurs on a feature in
-    // the unclustered-point layer, open a popup at
-    // the location of the feature, with
-    // description HTML from its properties.
-    map.on('click', 'unclustered-point', function (e) {
+    /* Popup for unclustered points */
+    map.on('click', 'unclustered-point', (e) => {
         const { popUpMarkup } = e.features[0].properties;
         const coordinates = e.features[0].geometry.coordinates.slice();
 
-        // Ensure that if the map is zoomed out such that
-        // multiple copies of the feature are visible, the
-        // popup appears over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
@@ -104,10 +117,8 @@ map.on('load', function () {
             .addTo(map);
     });
 
-    map.on('mouseenter', 'clusters', () => {
-        map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseleave', 'clusters', () => {
-        map.getCanvas().style.cursor = '';
-    });
+    map.on('mouseenter', 'clusters', () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', 'clusters', () => map.getCanvas().style.cursor = '');
 });
+
+

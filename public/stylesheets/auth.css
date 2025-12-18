@@ -1,0 +1,51 @@
+/* card background for login/register */
+.auth-container .card {
+    background-color: #0f0e17; /* dark card background */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* card image rounded corners */
+.auth-container .card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* card title  */
+.auth-container .card-title {
+    color: #fffffe; /* bright heading */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* form labels */
+.auth-container .form-label {
+    color: #a7a9be; 
+    font-weight: 500;
+}
+
+/* form inputs */
+.auth-container .form-control {
+    border-radius: 6px;
+    border: 1px solid #6c6e81; 
+}
+
+/* buttons */
+.auth-container .btn {
+    background-color: #ff8906; 
+    color: #fffffe;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-container .btn:hover {
+    background-color: #f25f4c; 
+    transform: translateY(-2px);
+}
+
+/* validation message */
+.valid-feedback, .text-secondary {
+    color: #fffffe;
+}
