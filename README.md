@@ -100,8 +100,7 @@ CLOUDINARY_KEY=
 CLOUDINARY_SECRET=
 MAPTILER_API_KEY=
 SESSION_SECRET=
-
-
+```
 ---
 
 ## Local Setup
@@ -118,16 +117,6 @@ App runs on:
 ```
 http://localhost:3000
 ```
-
----
-
-## Roadmap / Future Enhancements
-
-* Client-side form validation
-* Lazy-loading images
-* Pagination for campgrounds
-* Role-based permissions (admin/moderator)
-* UI refresh with modern component library
 
 ---
 
