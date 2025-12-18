@@ -106,7 +106,7 @@ SESSION_SECRET=
 ## Local Setup
 
 ```bash
-git clone https://github.com/yourusername/yelpcamp.git
+git clone https://github.com/matthewjmon/yelpcamp.git
 cd yelpcamp
 npm install
 node app.js
