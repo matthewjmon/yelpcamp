@@ -17,18 +17,18 @@ A production-ready full-stack web application for discovering, creating, and rev
 ## Screenshots
 
 <p float="left">
-  <img src="./screenshots/index.png" width="300" />
-  <img src="./screenshots/show-page.png" width="300" />
+  <img src="./screenshots/index.png" width="300" alt="Campground Index Page" />
+  <img src="./screenshots/show-page.png" width="300" alt="Campground Show Page" />
 </p>
 
 <p float="left">
-  <img src="./screenshots/new-campground.png" width="300" />
-  <img src="./screenshots/reviews.png" width="300" />
+  <img src="./screenshots/new-campground.png" width="300" alt="New Campground Form" />
+  <img src="./screenshots/reviews.png" width="300" alt="Review Section" />
 </p>
 
 <p float="left">
-  <img src="./screenshots/login.png" width="300" />
-  <img src="./screenshots/register.png" width="300" />
+  <img src="./screenshots/login.png" width="300" alt="Login Page" />
+  <img src="./screenshots/register.png" width="300" alt="Register Page" />
 </p>
 
 ---
