@@ -18,7 +18,7 @@ A production-ready full-stack web application for discovering, creating, and rev
 
 <p float="left">
   <img src="./screenshots/index.png" width="300" alt="Campground Index Page" />
-  <img src="./screenshots/show-page.png" width="300" alt="Campground Show Page" />
+  <img src="./screenshots/show-page.png" width="300" height="143" alt="Campground Show Page" />
 </p>
 
 <p float="left">
