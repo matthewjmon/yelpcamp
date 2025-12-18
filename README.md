@@ -1,129 +1,106 @@
-# YelpCamp
+# YelpCamp – Full-Stack Campground Review App
 
-A production-ready full-stack web application for discovering, creating, and reviewing campgrounds. This version has been **significantly redesigned, refactored, and optimised** for performance, usability, and deployment.
+A production-ready full-stack web application for discovering, creating, and reviewing campgrounds. This version has been **completely refactored, optimised, and redesigned** for performance, usability, and deployment.
+
+---
 
 ![YelpCamp Home Page](./screenshots/home.png)
+
 ---
 
 ## Live Demo
 
-**Hosted on Render:** *https://yelpcamp-7bl3.onrender.com/*
+**Hosted on Render:** [https://yelpcamp-7bl3.onrender.com](https://yelpcamp-7bl3.onrender.com)
 
 ---
 
 ## Screenshots
 
-## Screenshots
+<p float="left">
+  <img src="./screenshots/index.png" width="300" />
+  <img src="./screenshots/show-page.png" width="300" />
+</p>
 
-![Campgrounds Index](./screenshots/index.png)
-![Campground Detail](./screenshots/show-page.png)
+<p float="left">
+  <img src="./screenshots/new-campground.png" width="300" />
+  <img src="./screenshots/reviews.png" width="300" />
+</p>
 
-
+<p float="left">
+  <img src="./screenshots/login.png" width="300" />
+  <img src="./screenshots/register.png" width="300" />
+</p>
 
 ---
 
 ## Tech Stack
 
-### Frontend
-
-* HTML5
-* CSS3
-* Bootstrap
-* EJS templating
-
-### Backend
-
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
-
-### Auth & Security
-
-* Passport.js (local strategy)
-* Express-session
-* Authorization middleware
-
-### Maps & Media
-
-* **MapTiler SDK** (replacing Mapbox for optimised mapping)
-* Cloudinary (image hosting & optimisation)
-
-### Deployment
-
-* Render (Node service)
-* MongoDB Atlas
+**Frontend:** HTML5, CSS3, Bootstrap, EJS templating  
+**Backend:** Node.js, Express.js, MongoDB (Mongoose)  
+**Auth & Security:** Passport.js (local strategy), Express-session, Authorization middleware  
+**Maps & Media:** MapTiler SDK (optimized maps), Cloudinary (image hosting & optimisation)  
+**Deployment:** Render (Node service), MongoDB Atlas  
 
 ---
 
 ## Core Features
 
 ### Campgrounds
-
-* Create, edit, and delete campgrounds
-* Upload multiple images per campground
-* View campground details with interactive map
-
-![New Campground Form](./screenshots/new-campground.png)
+- Full CRUD: create, edit, delete campgrounds
+- Upload multiple images per campground (Cloudinary integration)
+- Dynamic, interactive maps with geocoded locations and clustering
+- Location validation & error handling
 
 ### Reviews
-
-* Add and delete reviews
-* One-review-per-user restriction
-* Average rating calculation
-
-![Review Section](./screenshots/reviews.png)
+- Create & delete reviews
+- One-review-per-user enforcement
+- Average rating calculation
 
 ### Authentication & Authorization
-
-* User registration and login
-* Session-based authentication
-* Resource ownership enforcement
-
-![Register Page](./screenshots/register.png)
+- User registration, login, logout
+- Session-based authentication
+- Author-only editing & deletion for campgrounds and reviews
 
 ### Maps
-
-* Interactive maps with clustering and popups
-* Optimised data handling for fast map load
-* Auto-fit bounds with capped zoom to enhance usability
+- MapTiler integration for fast, cost-effective mapping
+- Preprocessed GeoJSON for optimized performance
+- Clustered markers with popups
+- Auto-fit bounds with max zoom to prevent over-zooming
 
 ---
 
 ## Key Enhancements & Engineering Decisions
 
 ### UI / UX Overhaul
-
-* Redesigned campground card layout for clarity and visual hierarchy
-* Applied a **custom, cohesive color palette** for consistent styling
-* Improved spacing, typography, and overall component consistency
-* Reduced visual clutter while preserving full functionality
+- Redesigned campground card layout for clarity and hierarchy
+- Custom cohesive color palette for consistent styling
+- Improved spacing, typography, and responsiveness across devices
+- Reduced visual clutter while maintaining full functionality
 
 ### Map Provider Migration & Performance Optimisation
-
-* Replaced Mapbox with **MapTiler** for cost-effective, high-performance maps
-* Preprocessed GeoJSON data to send only essential geometry and popup content
-* Tuned cluster radius and zoom limits for smoother interaction with large datasets
-* Implemented intelligent auto-fit bounds with max zoom to prevent over-zooming
+- Replaced Mapbox with MapTiler for cost-efficient maps
+- Preprocessed map data to reduce payload
+- Tuned clustering radius and zoom limits for smoother interactions
+- Auto-fit bounds with maximum zoom to enhance user experience
 
 ### Codebase & Deployment Improvements
-
-* Cleaned up unused middleware and legacy code paths
-* Improved environment variable handling for production safety
-* Hardened error handling to prevent silent failures
-* Verified stable deployment on Render with MongoDB Atlas
+- Cleaned unused middleware and legacy code
+- Improved environment variable handling for production safety
+- Robust error handling and flash messaging
+- Verified stable deployment on Render with MongoDB Atlas
 
 ---
 
 ## Environment Variables
 
 ```env
-DATABASE_URL=
+MONGO_URI=
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_KEY=
 CLOUDINARY_SECRET=
 MAPTILER_API_KEY=
 SESSION_SECRET=
-```
+
 
 ---
 
@@ -133,7 +110,7 @@ SESSION_SECRET=
 git clone https://github.com/yourusername/yelpcamp.git
 cd yelpcamp
 npm install
-npm start
+node app.js
 ```
 
 App runs on:
